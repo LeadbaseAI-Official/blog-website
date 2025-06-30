@@ -159,6 +159,7 @@ if __name__ == "__main__":
     processed_count = 0
     topics_to_process = []
     remaining_lines = []
+    all_metadata = []
     all_topics = []  # Initialize all_topics here
 
     try:

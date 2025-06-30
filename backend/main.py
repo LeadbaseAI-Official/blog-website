@@ -163,7 +163,7 @@ if __name__ == "__main__":
     all_topics = []  # Initialize all_topics here
 
     try:
-        with open("../topics.txt", "r") as f:  # Corrected path
+        with open("./topics.txt", "r") as f:  # Corrected path
             # Read all lines, strip whitespace, and filter out empty lines
             all_topics = [line.strip() for line in f if line.strip()]
 

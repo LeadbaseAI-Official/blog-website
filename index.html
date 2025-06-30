@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeadBaseAI |  Blog</title>
+  <meta name="description" content="Explore our latest insights, tips, and strategies on AI automation, lead generation, and more." />
+  <link rel="stylesheet" href="static/style.css" />
+  <link rel="icon" href="/static/logo.png" type="image/png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="bg-particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+  </div>
+
+  <header>
+    <h1>LeadBaseAI Blog</h1>
+    <nav class="nav-menu">
+      <a href= "https://leadbaseai.in">Home</a>
+      <a href="/blogs">Blogs</a>
+      <a href="/About">About</a>
+    </nav>
+  </header>
+
+  <main class="blog-container" id="blogContainer">
+    <!-- Blog cards will be injected here -->
+  </main>
+<footer class="modern-footer">
+  <div class="footer-content">
+    <p>&copy; 2025 LeadSparkAI. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="mailto:support@leadbaseai.in"><i class="fas fa-envelope"></i> support@leadbaseai.in</a>
+      <a href="tel:+918766334584"><i class="fas fa-phone"></i> +91 87663 34584</a>
+      <a href="https://www.instagram.com/leadbaseai/" target="_blank"><i class="fab fa-instagram"></i> @leadbaseai</a>
+    </div>
+  </div>
+</footer>
+
+
+  <script>
+  fetch('metadata.json')
+    .then(res => res.json())
+    .then(blogs => {
+      blogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+      const container = document.getElementById('blogContainer');
+      blogs.forEach(blog => {
+        const card = document.createElement('a');
+        card.href = blog.url;
+        card.className = 'blog-card';
+        card.style.textDecoration = 'none';
+        card.style.color = 'inherit';
+        card.innerHTML = `
+          <h2>${blog.title}</h2>
+          <p>${blog.description}</p>
+          <div class="date">${new Date(blog.date).toDateString()}</div>
+        `;
+        container.appendChild(card);
+      });
+    })
+    .catch(err => {
+      console.error("Failed to load blogs:", err);
+      document.getElementById('blogContainer').innerHTML = "<p>Unable to load blog posts.</p>";
+    });
+</script>
+
+
+</body>
+</html>

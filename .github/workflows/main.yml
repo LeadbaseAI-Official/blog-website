@@ -1,0 +1,42 @@
+name: Daily Blog Generator
+
+on:
+  schedule:
+    # 9:00 AM IST -> 3:30 AM UTC
+    - cron: '30 3 * * *'
+    # 6:00 PM IST -> 12:30 PM UTC
+    - cron: '30 12 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  generate-blog:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./your-script-folder  # replace with actual path if needed
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Blog Generator Script
+        run: python backend/main.py  # or change to the actual entrypoint name
+
+      - name: Commit and Push Changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add ../blogs ../metadata.json ../topics.txt
+          git commit -m "🤖 Auto-generated blog and metadata on $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+          git push
